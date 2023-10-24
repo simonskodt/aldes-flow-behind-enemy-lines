@@ -18,12 +18,11 @@ class Graph:
 
     def get_path_capacity(self, n1, n2):
         if n1 not in self.graph or n2 not in self.graph:
-            raise ValueError("Node(s) not in graph")
+            self.add_edge(n1, n2, capacity)
         
-        adjacent_nodes = self.graph[n1]
-        for edge in adjacent_nodes:
-            if n2 == edge[0]:
-                return edge[1]
+        for neighbor, capacity in self.graph[n1]:
+            if neighbor == n2:
+                return capacity if capacity != float('inf') else 0
             
     def update_path_weight(self, n1, n2, new_weight):
         if n2 not in self.graph:
