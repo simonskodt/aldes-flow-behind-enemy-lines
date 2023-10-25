@@ -56,8 +56,35 @@ def build_graph():
         graph.add_edge(fromN, toN, cap)
 
     graph.add_edge(EG, SINK)
+
+    # To check if reducing the capacities on the lines from division 4W to
+    # divisions 48 and 49, set the formel argument of run to true.
+    graph = decrease_capacities(graph, run=True)
     
     return graph
+
+def decrease_capacities(graph, run=False):
+    """
+    Decrease the capacities on the lines from division 4W to divisions 48 and
+    49. This allows for analyzing the effects of this change in capacities.
+
+    Args:
+        graph: a Graph object representing the graph to search
+        if run is False: simply return the graph object unchanged
+        if min_cut is True: update the capacities for the two lines
+
+    Returns:
+        the graph object.
+    """
+    if run:
+        MINSK, N48, N49 = 20, 21, 23
+        MINSK_TO_N48, MINSK_TO_N49 = 20, 20
+
+        graph.update_path_weight(MINSK, N48, MINSK_TO_N48)
+        graph.update_path_weight(MINSK, N49, MINSK_TO_N49)
+    
+    return graph
+
 
 def bfs(graph, min_cut=False):
     """
