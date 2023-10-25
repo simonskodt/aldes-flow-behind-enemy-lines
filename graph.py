@@ -10,11 +10,13 @@ class Graph:
         if node in self.graph:
             return
         
-        self.graph[node] = []   # [(node, capacity)]
+        self.graph[node] = []
 
     def add_edge(self, n1, n2, capacity=float('inf')):
         if n1 in self.graph and n2 in self.graph:
             self.graph[n1].append((n2, capacity))
+            if n1 not in self.graph[n2]:
+                self.graph[n2].append((n1, capacity))
 
     def get_path_capacity(self, n1, n2):
         if n1 not in self.graph or n2 not in self.graph:
@@ -22,7 +24,7 @@ class Graph:
         
         for neighbor, capacity in self.graph[n1]:
             if neighbor == n2:
-                return capacity if capacity != float('inf') else 0
+                return capacity
             
     def update_path_weight(self, n1, n2, new_weight):
         if n2 not in self.graph:
@@ -46,7 +48,7 @@ class Graph:
         
         return not self.graph[node]
     
-    def pretty_print(self):
+    def print_graph(self):
         for node in self.graph:
             print(f"Node: {node}")
             adjacent_nodes = self.graph[node]
