@@ -71,7 +71,7 @@ def decrease_capacities(graph, run=False):
     Args:
         graph: a Graph object representing the graph to search
         if run is False: simply return the graph object unchanged
-        if min_cut is True: update the capacities for the two lines
+        if run is True: update the capacities for the two lines
 
     Returns:
         the graph object.
